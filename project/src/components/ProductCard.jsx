@@ -1,4 +1,14 @@
+import {useDispatch} from "react-redux";
+import {addToCart, countAmount} from "../features/productsSlice.jsx";
+
 const ProductCard = ({product}) => {
+
+    const dispatch = useDispatch()
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product))
+        dispatch(countAmount(product))
+    }
 
     return (
         <div className={"flex flex-col justify-between w-56 h-70 bg-white custom-shadow cursor-pointer rounded-md hover:bg-slate-50 ease-out duration-300 hover:translate-y-0.5"}>
@@ -10,6 +20,7 @@ const ProductCard = ({product}) => {
                 <div className={""}>250$</div>
             </div>
             <div
+                onClick={() => handleAddToCart(product)}
                 className={"add-btn bg-yellow-400 p-2 text-center uppercase text-xs tracking-wider cursor-pointer rounded-b-md ease-out duration-300"}>
                 add to cart
             </div>

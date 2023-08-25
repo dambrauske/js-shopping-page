@@ -1,22 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ProductCard from "../components/ProductCard.jsx";
+import {useSelector} from "react-redux";
 
 const Index = () => {
 
-    const [products, setProducts] = useState(() => {
-        return JSON.parse(localStorage.getItem("products") || '[]')
-    })
-
-    useEffect(() => {
-        fetch('https://dummyjson.com/products')
-            .then(res => res.json())
-            .then(data => setProducts(data.products))
-    }, [])
-
-
-    useEffect(() => {
-        localStorage.setItem("products", JSON.stringify(products))
-    }, [products])
+    const products = useSelector((state) => state.products.productsData)
 
     return (
             <div className={"flex flex-wrap gap-10 py-8"}>
