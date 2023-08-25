@@ -29,7 +29,7 @@ function App() {
 
     return (
         <>
-            <div className={"bg-slate-100"}>
+            <div>
                 <Navbar/>
                 <div className={"bg-slate-100 container mx-auto"}>
                     <Routes>

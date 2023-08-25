@@ -40,10 +40,17 @@ export const productsSlice = createSlice({
 
             localStorage.setItem("totalAmount", state.totalAmount.toString());
         },
+        incrementQuantity: (state) => {
+            state.productsInCart.quantity += 1
+        },
+        decrementQuantity: (state) => {
+            state.productsInCart.quantity -= 1
+        },
+
     }
 })
 
-export const {setProducts, addToCart, countAmount} = productsSlice.actions
+export const {setProducts, addToCart, countAmount, incrementQuantity, decrementQuantity} = productsSlice.actions
 
 export default productsSlice.reducer
 

@@ -7,7 +7,7 @@ const Index = () => {
     const products = useSelector((state) => state.products.productsData)
 
     return (
-            <div className={"flex flex-wrap gap-10 py-8"}>
+            <div className={"flex bg-white flex-wrap gap-10 py-8"}>
                 {products.map((product, i) => (
                     <ProductCard
                         key={i}
