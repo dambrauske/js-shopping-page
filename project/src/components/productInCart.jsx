@@ -1,6 +1,6 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import {decrementQuantity, incrementQuantity} from "../features/productsSlice.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {decrementQuantity, incrementQuantity, removeFromCart} from "../features/productsSlice.jsx";
 
 const ProductInCart = ({product}) => {
 
@@ -19,24 +19,26 @@ const ProductInCart = ({product}) => {
             </div>
             <div className={"flex gap-3"}>
                 <div
-                    onClick={() => dispatch(incrementQuantity())}
+                    onClick={() => dispatch(incrementQuantity(product.id))}
                     className={"w-6 h-6 bg-white flex justify-center items-center hover:bg-green-200 ease-out duration-300 cursor-pointer"}>
                     <i className="fas fa-plus"></i>
                 </div>
                 <div>{product.quantity}</div>
                 <div
-                    onClick={() => dispatch(decrementQuantity())}
+                    onClick={() => dispatch(decrementQuantity(product.id))}
                     className={"w-6 h-6 bg-white flex justify-center items-center hover:bg-green-200 ease-out duration-300 cursor-pointer"}>
                     <i className="fas fa-minus"></i>
                 </div>
             </div>
-            <div className={"text-xs flex gap-1 hover:text-red-600 cursor-pointer ease-out duration-300"}>
+            <div
+                onClick={() => dispatch(removeFromCart(product.id))}
+                className={"text-xs flex gap-1 hover:text-red-600 cursor-pointer ease-out duration-300"}>
                 <i className="far fa-trash-alt"></i>
                 <div>Remove</div>
             </div>
             <div className={"flex flex-col gap-1"}>
                 <div className={"font-light"}>Total:</div>
-                <div>20$</div>
+                <div>$</div>
             </div>
         </div>
     );

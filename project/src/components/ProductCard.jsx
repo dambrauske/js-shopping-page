@@ -17,7 +17,7 @@ const ProductCard = ({product}) => {
                     <img className={"w-full h-full object-cover"} src={product.thumbnail} alt=""/>
                 </div>
                 <div className={"font-bold tracking-wider h-12 text-center"}>{product.title}</div>
-                <div className={""}>250$</div>
+                <div className={""}>{product.price}$</div>
             </div>
             <div
                 onClick={() => handleAddToCart(product)}

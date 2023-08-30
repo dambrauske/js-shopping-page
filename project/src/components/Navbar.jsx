@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 
 const Navbar = () => {
 
-    const productsInCart = useSelector((state) => state.products.productsInCart)
+    const totalQuantity = useSelector((state) => state.products.totalQuantity)
 
     return (
         <nav className="bg-gradient-to-r from-teal-200 to-lime-200">
@@ -25,7 +25,7 @@ const Navbar = () => {
                         <div className={"w-10 h-10 flex justify-center items-center cursor-pointer relative"}>
                             <div
                                 className={"absolute top-1 right-1 w-4 h-4 bg-yellow-300 rounded-full flex justify-center items-center text-xs"}>
-                                {productsInCart.length}
+                                {totalQuantity}
                             </div>
                             <div>
                                 <i className="fas fa-shopping-cart"></i>
