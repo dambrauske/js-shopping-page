@@ -1,13 +1,18 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {decrementQuantity, incrementQuantity, removeFromCart} from "../features/productsSlice.jsx";
+import {useDispatch} from "react-redux";
+import {
+    decrementQuantity,
+    incrementQuantity,
+    removeFromCart
+} from "../features/productsSlice.jsx";
 
 const ProductInCart = ({product}) => {
 
     const dispatch = useDispatch()
 
     return (
-        <div className={"flex gap-20 p-4 items-center border-b-2"}>
+        <div
+            className={"flex gap-20 p-4 items-center border-b-2"}>
             <div className={"w-12 h-16"}>
                 <img className={"w-full h-full object-cover"}
                      src={product.thumbnail} alt=""/>
@@ -38,7 +43,7 @@ const ProductInCart = ({product}) => {
             </div>
             <div className={"flex flex-col gap-1"}>
                 <div className={"font-light"}>Total:</div>
-                <div>$</div>
+                <div>{product.price * product.quantity} EUR</div>
             </div>
         </div>
     );

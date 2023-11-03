@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     productsData: [],
@@ -84,6 +84,7 @@ export const productsSlice = createSlice({
             state.totalAmount = newTotalAmount
             localStorage.setItem("totalAmount", newTotalAmount)
         },
+
         incrementQuantity: (state, action) => {
             const productId = action.payload
             state.productsInCart = updateProductQuantity(state.productsInCart, productId, 'increment')
@@ -119,7 +120,7 @@ export const productsSlice = createSlice({
     }
 })
 
-export const {setProducts, addToCart, countAmount, incrementQuantity, decrementQuantity, removeFromCart} = productsSlice.actions
+export const {setProducts, addToCart, countAmount, incrementQuantity, decrementQuantity, removeFromCart } = productsSlice.actions
 
 export default productsSlice.reducer
 
