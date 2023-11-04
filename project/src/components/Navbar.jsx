@@ -10,6 +10,7 @@ const Navbar = () => {
     const currentUser = useSelector(state => state.user.currentUser)
     const cart = useSelector(state => state.products.cart)
     const totalQuantity = useSelector(state => state.products.totalQuantity)
+    const products = useSelector(state => state.products.products)
     const [showUserDropdown, setShowUserDropdown] = useState(false)
 
     const toggleUserDropdown = () => {
@@ -29,7 +30,6 @@ const Navbar = () => {
                     <div className="cursor-pointer hover:text-yellow-500 ease-out duration-300">
                         <Link to="/about">About</Link>
                     </div>
-
 
                 </div>
                 <div className="flex gap-10 items-center">

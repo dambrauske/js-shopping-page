@@ -5,6 +5,7 @@ import {addToCart} from "../features/productsSlice.jsx";
 const ProductPageDescription = ({singleProduct}) => {
     const dispatch = useDispatch()
     const addToToCart = (product) => {
+        console.log('add to cart clicked')
         dispatch(addToCart(product))
     }
 
@@ -19,7 +20,7 @@ const ProductPageDescription = ({singleProduct}) => {
             </div>
             <div>Price: {singleProduct.price} €</div>
             <div
-                onClick={(e) => addToToCart(product,e)}
+                onClick={() => addToToCart(singleProduct)}
                 className="bg-yellow-400 p-2 text-center uppercase text-xs tracking-wider cursor-pointer rounded ease-out duration-300 w-40 hover:text-slate-50 hover:bg-yellow-500">
                 add to cart
             </div>

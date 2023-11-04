@@ -7,22 +7,19 @@ const calculateTotalQuantity = (productsArray) => {
     }
     return totalQuantity
 }
-const updateTotalAmount = (productsInCart) => {
-    return productsInCart.reduce((total, product) => {
-        return total + product.quantity * product.price;
-    }, 0)
-}
 
-const cart = JSON.parse(localStorage.getItem('cart'))
+const cart = JSON.parse(localStorage.getItem("cart"))
+const totalQuantity = JSON.parse(localStorage.getItem("totalQuantity"))
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
         cart: cart ? cart : [],
-        totalQuantity: 0,
+        totalQuantity: totalQuantity ? totalQuantity : 0,
+        products: []
     },
     reducers: {
         setProducts: (state, action) => {
-            state.productsData = action.payload
+            state.products = action.payload
         },
         addToCart: (state, action) => {
             const product = action.payload
@@ -41,6 +38,7 @@ export const productsSlice = createSlice({
             }
 
             state.totalQuantity = calculateTotalQuantity(state.cart)
+            localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity ))
             localStorage.setItem("cart", JSON.stringify(state.cart))
 
         },
@@ -54,13 +52,16 @@ export const productsSlice = createSlice({
             }).filter(p => p.quantity > 0)
 
             state.totalQuantity = calculateTotalQuantity(state.cart)
+            localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity ))
+            localStorage.setItem("cart", JSON.stringify(state.cart))
         },
         removeSameIdProductsFromCart: (state, action) => {
             const productId = action.payload
             state.cart = state.cart.filter(product => product.id !== productId)
             state.totalQuantity = calculateTotalQuantity(state.cart)
+            localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity ))
+            localStorage.setItem("cart", JSON.stringify(state.cart))
         },
-
     }
 })
 

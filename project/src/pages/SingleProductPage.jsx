@@ -6,7 +6,7 @@ import ProductPageDescription from "../components/ProductPageDescription.jsx";
 
 const SingleProductPage = () => {
     const {id} = useParams()
-    const products = useSelector((state) => state.products.productsData)
+    const products = useSelector((state) => state.products.products)
     const singleProduct = products.find(product => product.id.toString() === id)
     const singleProductImages = singleProduct ? singleProduct.images : []
     const singleProductThumbnail = singleProduct ? singleProduct.thumbnail : undefined
@@ -14,7 +14,7 @@ const SingleProductPage = () => {
     return (
         <div>
             <Navbar/>
-            <div className="flex p-4 gap-2">
+            <div className="flex p-4 gap-4">
 
                 <ProductPageImages
                     singleProductImages={singleProductImages}
