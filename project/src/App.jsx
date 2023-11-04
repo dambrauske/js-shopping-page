@@ -12,33 +12,6 @@ import {setCurrentUser} from "./features/userSlice.jsx";
 import Login from "./pages/Login.jsx";
 
 function App() {
-    const dispatch = useDispatch()
-    const token = useSelector(state => state.user.token)
-
-    useEffect(() => {
-
-        fetch('https://dummyjson.com/products')
-            .then(res => res.json())
-            .then(data =>
-                dispatch(setProducts(data.products)))
-
-        if (token) {
-            const options = {
-                method: "GET",
-                headers: {
-                    "content-type": "application/json",
-                    "authorization": token,
-                },
-            }
-
-            fetch('http://localhost:5000/user', options)
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    dispatch(setCurrentUser(data.data))
-                })
-        }
-    }, [])
 
 
     return (

@@ -1,31 +1,35 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import UserDropdown from "./UserDropdown.jsx";
 import {setProducts} from "../features/productsSlice.jsx";
-import {setCurrentUser} from "../features/userSlice.jsx";
 
 const Navbar = () => {
 
     const currentUser = useSelector(state => state.user.currentUser)
     const cart = useSelector(state => state.products.cart)
     const totalQuantity = useSelector(state => state.products.totalQuantity)
-    const products = useSelector(state => state.products.products)
     const [showUserDropdown, setShowUserDropdown] = useState(false)
-
+    const dispatch = useDispatch()
     const toggleUserDropdown = () => {
         setShowUserDropdown(!showUserDropdown)
     }
 
-    console.log('currentUser', currentUser)
-    console.log('cart', cart)
+    const resetProducts = () => {
+        fetch('https://dummyjson.com/products')
+            .then(res => res.json())
+            .then(data =>
+                dispatch(setProducts(data.products)))
+    }
 
     return (
         <nav className="bg-gradient-to-r from-green-200 via-green-300 to-blue-400">
             <div className="container mx-auto flex py-2 items-center justify-between ">
                 <div className="flex gap-10">
                     <div className="cursor-pointer hover:text-yellow-500 ease-out duration-300">
-                        <Link to="/">Home</Link>
+                        <Link to="/"
+                        onClick={resetProducts}
+                        >Home</Link>
                     </div>
                     <div className="cursor-pointer hover:text-yellow-500 ease-out duration-300">
                         <Link to="/about">About</Link>

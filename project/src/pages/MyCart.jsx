@@ -2,18 +2,32 @@ import React from 'react';
 import ProductInCart from "../components/productInCart.jsx";
 import {useSelector} from "react-redux";
 import Navbar from "../components/Navbar.jsx";
+import {Link} from "react-router-dom";
 
 const MyCart = () => {
 
     const cart = useSelector((state) => state.products.cart)
     const totalQuantity = useSelector((state) => state.products.totalQuantity)
 
-    const calculateTotalprice = (productsArray) => {
+    const calculateTotalPrice = (productsArray) => {
         let totalPrice = 0
         for (let i = 0; i < productsArray.length; i++) {
             totalPrice += productsArray[i].price * productsArray[i].quantity
         } return totalPrice
     }
+
+    if (cart.length === 0) return (
+        <div>
+            <Navbar/>
+            <div className="flex flex-col gap-2 p-4 items-center">
+                <div>Cart is empty</div>
+                <Link to="/"
+                className="text-blue-400 hover:underline">
+                    Continue shopping</Link>
+            </div>
+
+        </div>
+    )
 
     return (
         <div>
@@ -34,7 +48,7 @@ const MyCart = () => {
                             <div className={"text-yellow-500"}>Order summary:</div>
                             <div className={"flex flex-col gap-3"}>
                                 <div>Items: {totalQuantity}</div>
-                                <div>Total price: {calculateTotalprice(cart)} €</div>
+                                <div>Total price: {calculateTotalPrice(cart)} €</div>
                                 <div
                                     className={"bg-yellow-400 p-2 text-center uppercase text-xs tracking-wider cursor-pointer rounded-md ease-out duration-300 hover:text-white hover:bg-yellow-500"}>
                                     CHECKOUT
