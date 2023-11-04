@@ -11,7 +11,6 @@ const ProductPageDescription = ({singleProduct}) => {
 
     return (
         <div className="flex flex-col gap-2">
-            {/*<div className="text-sm">{singleProduct.category}</div>*/}
             <div>{singleProduct.brand}</div>
             <div className="text-lg font-bold">{singleProduct.title}</div>
             <div className="flex flex-col">

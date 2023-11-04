@@ -1,19 +1,11 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
-import UserDropdown from "./UserDropdown.jsx";
 import {setProducts} from "../features/productsSlice.jsx";
 
 const Navbar = () => {
 
-    const currentUser = useSelector(state => state.user.currentUser)
-    const cart = useSelector(state => state.products.cart)
     const totalQuantity = useSelector(state => state.products.totalQuantity)
-    const [showUserDropdown, setShowUserDropdown] = useState(false)
     const dispatch = useDispatch()
-    const toggleUserDropdown = () => {
-        setShowUserDropdown(!showUserDropdown)
-    }
 
     const resetProducts = () => {
         fetch('https://dummyjson.com/products')
@@ -37,18 +29,6 @@ const Navbar = () => {
 
                 </div>
                 <div className="flex gap-10 items-center">
-
-                    <div
-                        onClick={toggleUserDropdown}
-                        className="flex justify-center items-center gap-2 cursor-pointer hover:text-white ease-out duration-200 relative">
-                        <div className="hidden md:block">User</div>
-                        <i className="fas fa-chevron-down"></i>
-                        {
-                            showUserDropdown && <UserDropdown
-                                toggleUserDropdown={toggleUserDropdown}
-                            />
-                        }
-                    </div>
                     <div
                         className="bg-yellow-400 px-2 rounded cursor-pointer hover:bg-yellow-500 hover:text-white ease-out duration-200">
                         <Link to="/cart" className="flex items-center">
