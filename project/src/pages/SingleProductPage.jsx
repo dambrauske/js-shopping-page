@@ -11,6 +11,9 @@ const SingleProductPage = () => {
     const singleProductImages = singleProduct ? singleProduct.images : []
     const singleProductThumbnail = singleProduct ? singleProduct.thumbnail : undefined
 
+    console.log('products', products)
+    console.log('singleProduct', singleProduct)
+
     return (
         <div>
             <Navbar/>

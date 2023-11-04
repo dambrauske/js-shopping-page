@@ -10,16 +10,19 @@ const calculateTotalQuantity = (productsArray) => {
 
 const cart = JSON.parse(localStorage.getItem("cart"))
 const totalQuantity = JSON.parse(localStorage.getItem("totalQuantity"))
+const products = JSON.parse(sessionStorage.getItem("products"))
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
         cart: cart ? cart : [],
         totalQuantity: totalQuantity ? totalQuantity : 0,
-        products: []
+        products: products? products : [],
+        selectedProduct: undefined,
     },
     reducers: {
         setProducts: (state, action) => {
             state.products = action.payload
+            sessionStorage.setItem("products", JSON.stringify(state.products))
         },
         addToCart: (state, action) => {
             const product = action.payload

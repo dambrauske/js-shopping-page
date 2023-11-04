@@ -25,7 +25,9 @@ const ProductPageImages = ({singleProductImages, singleProductThumbnail}) => {
                 {singleProductImages && singleProductImages.map((img, i) => (
                     <ImageCard
                         key={i}
-                        image={img}/>
+                        image={img}
+                        setMainImage={setMainImage}
+                    />
                 ))
 
                 }

@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar.jsx";
 import FilterProducts from "../components/FilterProducts.jsx";
 import {setProducts} from "../features/productsSlice.jsx";
 import {setCurrentUser} from "../features/userSlice.jsx";
+import Footer from "../components/Footer.jsx";
 
 const Home = () => {
     const products = useSelector((state) => state.products.products)
@@ -40,19 +41,21 @@ const Home = () => {
 
 
     return (
-        <div>
-            <Navbar/>
-            <FilterProducts/>
-            <div className={"flex bg-white flex-wrap gap-10 py-8 justify-center"}>
-                {products && products.map((product, i) => (
-                    <ProductCard
-                        key={i}
-                        product={product}
-                    />
-                ))
-                }
+        <div className="min-h-screen flex flex-col justify-between">
+            <div>
+                <Navbar/>
+                <FilterProducts/>
+                <div className={"flex bg-white flex-wrap gap-10 py-8 justify-center"}>
+                    {products && products.map((product, i) => (
+                        <ProductCard
+                            key={i}
+                            product={product}
+                        />
+                    ))
+                    }
+                </div>
             </div>
-
+            <Footer/>
         </div>
 
     );

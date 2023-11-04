@@ -23,7 +23,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-gradient-to-r from-green-200 via-green-300 to-blue-400">
+        <nav className="bg-gradient-to-r from-green-300 to-blue-400">
             <div className="container mx-auto flex py-2 items-center justify-between ">
                 <div className="flex gap-10">
                     <div className="cursor-pointer hover:text-yellow-500 ease-out duration-300">
