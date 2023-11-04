@@ -7,8 +7,9 @@ import {setCurrentUser} from "../features/userSlice.jsx";
 
 const Navbar = () => {
 
-    const totalQuantity = useSelector((state) => state.products.totalQuantity)
     const currentUser = useSelector(state => state.user.currentUser)
+    const cart = useSelector(state => state.products.cart)
+    const totalQuantity = useSelector(state => state.products.totalQuantity)
     const [showUserDropdown, setShowUserDropdown] = useState(false)
 
     const toggleUserDropdown = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
     }
 
     console.log('currentUser', currentUser)
+    console.log('cart', cart)
 
     return (
         <nav className="bg-gradient-to-r from-green-200 via-green-300 to-blue-400">

@@ -1,126 +1,75 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
-    productsData: [],
-    productsInCart: [],
-    totalAmount: 0,
-    totalQuantity: 0,
+const calculateTotalQuantity = (productsArray) => {
+    let totalQuantity = 0
+    for (let i = 0; i < productsArray.length; i++) {
+        totalQuantity += productsArray[i].quantity
+    }
+    return totalQuantity
 }
-
-const updateProductQuantity = (productsInCart, productId, operation) => {
-    return productsInCart.map(product => {
-        if (product.id === productId) {
-            const updatedQuantity = operation === 'increment' ? product.quantity + 1 : product.quantity - 1;
-            return { ...product, quantity: updatedQuantity };
-        }
-        return product;
-    })
-}
-
 const updateTotalAmount = (productsInCart) => {
     return productsInCart.reduce((total, product) => {
         return total + product.quantity * product.price;
     }, 0)
 }
 
-const updateTotalQuantity = (productsInCart) => {
-    return productsInCart.reduce((total, product) => {
-        return total + product.quantity
-    }, 0)
-}
-
-const cart = localStorage.getItem("cart");
-const totalAmount = localStorage.getItem("totalAmount");
-const totalQuantity = localStorage.getItem("totalQuantity");
-
+const cart = JSON.parse(localStorage.getItem('cart'))
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
-        ...initialState,
-        productsInCart: cart ? JSON.parse(cart) : initialState.productsInCart,
-        totalAmount: totalAmount ? JSON.parse(totalAmount) : initialState.totalAmount,
-        totalQuantity: totalQuantity ? JSON.parse(totalQuantity) : initialState.totalQuantity,
+        cart: cart ? cart : [],
+        totalQuantity: 0,
     },
     reducers: {
         setProducts: (state, action) => {
             state.productsData = action.payload
         },
         addToCart: (state, action) => {
-            const index = state.productsInCart.findIndex(product => product.id === action.payload.id)
+            const product = action.payload
+            const productAlreadyInCart = state.cart.find(p => p.id === product.id)
 
-            if (index >= 0) {
-                state.productsInCart[index].quantity += 1
+            if (productAlreadyInCart) {
+                state.cart = state.cart.map(p => {
+                    if (p.id === product.id) {
+                        return {...p, quantity: p.quantity + 1}
+                    }
+                    return p;
+                })
             } else {
-                const updatedProduct = {...action.payload, quantity: 1}
-                state.productsInCart.push(updatedProduct)
+                const updatedProduct = {...product, quantity: 1}
+                state.cart.push(updatedProduct)
             }
 
-            localStorage.setItem("cart", JSON.stringify(state.productsInCart))
-
-            const newTotalQuantity = updateTotalQuantity(state.productsInCart)
-            state.totalQuantity = newTotalQuantity
-            localStorage.setItem("totalQuantity", newTotalQuantity)
-
-            const newTotalAmount = updateTotalAmount(state.productsInCart)
-            state.totalAmount = newTotalAmount
-            localStorage.setItem("totalAmount", newTotalAmount)
+            state.totalQuantity = calculateTotalQuantity(state.cart)
+            localStorage.setItem("cart", JSON.stringify(state.cart))
 
         },
-        removeFromCart : (state, action) => {
+        removeProductFromCart: (state, action) => {
             const productId = action.payload
-            state.productsInCart = state.productsInCart.filter(product => product.id !== productId)
+            state.cart = state.cart.map(p => {
+                if (p.id === productId && p.quantity >= 1) {
+                    return { ...p, quantity: p.quantity - 1 }
+                }
+                return p
+            }).filter(p => p.quantity > 0)
 
-            const newTotalQuantity = updateTotalQuantity(state.productsInCart)
-            state.totalQuantity = newTotalQuantity
-            localStorage.setItem("totalQuantity", newTotalQuantity)
-
-            const newTotalAmount = updateTotalAmount(state.productsInCart)
-            state.totalAmount = newTotalAmount
-            localStorage.setItem("totalAmount", newTotalAmount)
-
+            state.totalQuantity = calculateTotalQuantity(state.cart)
         },
-        countAmount: (state) => {
-            const newTotalAmount = updateTotalAmount(state.productsInCart)
-            state.totalAmount = newTotalAmount
-            localStorage.setItem("totalAmount", newTotalAmount)
-        },
-
-        incrementQuantity: (state, action) => {
+        removeSameIdProductsFromCart: (state, action) => {
             const productId = action.payload
-            state.productsInCart = updateProductQuantity(state.productsInCart, productId, 'increment')
-
-            const newTotalQuantity = updateTotalQuantity(state.productsInCart)
-            state.totalQuantity = newTotalQuantity
-            localStorage.setItem("totalQuantity", newTotalQuantity)
-
-            const newTotalAmount = updateTotalAmount(state.productsInCart)
-            state.totalAmount = newTotalAmount
-            localStorage.setItem("totalAmount", newTotalAmount)
-
-        },
-        decrementQuantity: (state, action) => {
-            const productId = action.payload
-            const productToUpdate = state.productsInCart.find(product => product.id === productId)
-
-            if (productToUpdate.quantity === 1) {
-                state.productsInCart = state.productsInCart.filter(product => product.id !== productId);
-            } else {
-                state.productsInCart = updateProductQuantity(state.productsInCart, productId, 'decrement');
-            }
-
-            const newTotalQuantity = updateTotalQuantity(state.productsInCart)
-            state.totalQuantity = newTotalQuantity
-            localStorage.setItem("totalQuantity", newTotalQuantity)
-
-            const newTotalAmount = updateTotalAmount(state.productsInCart)
-            state.totalAmount = newTotalAmount
-            localStorage.setItem("totalAmount", newTotalAmount)
+            state.cart = state.cart.filter(product => product.id !== productId)
+            state.totalQuantity = calculateTotalQuantity(state.cart)
         },
 
     }
 })
 
-export const {setProducts, addToCart, countAmount, incrementQuantity, decrementQuantity, removeFromCart } = productsSlice.actions
+export const {
+    setProducts,
+    addToCart,
+    removeProductFromCart,
+    removeSameIdProductsFromCart,
+} = productsSlice.actions
 
 export default productsSlice.reducer
 

@@ -5,10 +5,15 @@ import Navbar from "../components/Navbar.jsx";
 
 const MyCart = () => {
 
-    const cart = useSelector((state) => state.products.productsInCart)
-    const totalAmount = useSelector((state) => state.products.totalAmount)
+    const cart = useSelector((state) => state.products.cart)
     const totalQuantity = useSelector((state) => state.products.totalQuantity)
 
+    const calculateTotalprice = (productsArray) => {
+        let totalPrice = 0
+        for (let i = 0; i < productsArray.length; i++) {
+            totalPrice += productsArray[i].price * productsArray[i].quantity
+        } return totalPrice
+    }
 
     return (
         <div>
@@ -18,9 +23,9 @@ const MyCart = () => {
                     <div className={"bg-slate-50 px-8 py-4 rounded-md custom-shadow"}>
                         <div className={"text-yellow-500"}>Shopping Cart</div>
                         <div>
-                            {cart.map((product) => (
+                            {cart.length > 0 && cart.map((product, i) => (
                                 <ProductInCart
-                                    key={product.id}
+                                    key={i}
                                     product={product}
                                 />
                             ))}
@@ -29,7 +34,7 @@ const MyCart = () => {
                             <div className={"text-yellow-500"}>Order summary:</div>
                             <div className={"flex flex-col gap-3"}>
                                 <div>Items: {totalQuantity}</div>
-                                <div>Total price: {totalAmount} EUR</div>
+                                <div>Total price: {calculateTotalprice(cart)} €</div>
                                 <div
                                     className={"bg-yellow-400 p-2 text-center uppercase text-xs tracking-wider cursor-pointer rounded-md ease-out duration-300 hover:text-white hover:bg-yellow-500"}>
                                     CHECKOUT

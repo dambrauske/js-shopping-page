@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const token = sessionStorage.getItem("token");
+const token = sessionStorage.getItem("token")
 
 export const userSlice = createSlice({
     name: "user",

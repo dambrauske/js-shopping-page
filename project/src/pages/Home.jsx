@@ -11,7 +11,7 @@ const Home = () => {
         <div>
             <Navbar/>
             <div className={"flex bg-white flex-wrap gap-10 py-8 justify-center"}>
-                {products.map((product, i) => (
+                {products && products.map((product, i) => (
                     <ProductCard
                         key={i}
                         product={product}
