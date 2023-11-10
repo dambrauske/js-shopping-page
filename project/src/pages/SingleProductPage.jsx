@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Navbar from "../components/Navbar.jsx";
 import ProductPageImages from "../components/ProductPageImages.jsx";
 import ProductPageDescription from "../components/ProductPageDescription.jsx";
+import Footer from "../components/Footer.jsx";
 
 const SingleProductPage = () => {
     const {id} = useParams()
@@ -10,9 +11,6 @@ const SingleProductPage = () => {
     const singleProduct = products.find(product => product.id.toString() === id)
     const singleProductImages = singleProduct ? singleProduct.images : []
     const singleProductThumbnail = singleProduct ? singleProduct.thumbnail : undefined
-
-    console.log('products', products)
-    console.log('singleProduct', singleProduct)
 
     return (
         <div>
@@ -27,6 +25,7 @@ const SingleProductPage = () => {
                     singleProduct={singleProduct}
                 />
             </div>
+            <Footer/>
         </div>
     );
 };

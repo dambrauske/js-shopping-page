@@ -8,7 +8,6 @@ import Footer from "../components/Footer.jsx";
 
 const Home = () => {
     const products = useSelector((state) => state.products.products)
-    console.log(products)
     const dispatch = useDispatch()
 
     useEffect(() => {

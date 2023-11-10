@@ -28,7 +28,7 @@ const Footer = () => {
             <div className="flex grow gap-2 justify-around">
 
                 <div className="flex flex-col gap-2">
-                    <div className="font-bold">Follow us:</div>
+                    <div className="font-bold">Follow us</div>
                     <div className="flex gap-3">
                         <div>
                             <a href="https://facebook.com/" target="_blank">

@@ -5,14 +5,13 @@ import {addToCart} from "../features/productsSlice.jsx";
 const ProductPageDescription = ({singleProduct}) => {
     const dispatch = useDispatch()
     const addToToCart = (product) => {
-        console.log('add to cart clicked')
         dispatch(addToCart(product))
     }
 
     return (
-        <div className="flex flex-col gap-2">
-            <div>{singleProduct.brand}</div>
-            <div className="text-lg font-bold">{singleProduct.title}</div>
+        <div className="flex flex-col gap-4">
+            <div className="text-xl">{singleProduct.brand}</div>
+            <div className="text-2xl font-bold">{singleProduct.title}</div>
             <div className="flex flex-col">
                 <div>Description:</div>
                 <div>{singleProduct.description}</div>

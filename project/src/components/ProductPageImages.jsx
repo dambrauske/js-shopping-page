@@ -17,8 +17,8 @@ const ProductPageImages = ({singleProductImages, singleProductThumbnail}) => {
     return (
 
         <div className="flex flex-col gap-2 items-center">
-            <div>
-                <img src={mainImage} alt="product image"/>
+            <div className="w-96 h-96">
+                <img className="w-full h-full object-contain" src={mainImage} alt="product image"/>
             </div>
             <div className="flex gap-2 justify-center">
 

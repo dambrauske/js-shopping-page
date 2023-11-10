@@ -14,7 +14,6 @@ const ProductInCart = ({product}) => {
                      src={product.thumbnail} alt=""/>
             </div>
             <div className={"flex flex-col gap-1 w-52"}>
-                <div>Apple</div>
                 <div className={"font-bold tracking-wider"}>{product.title}</div>
                 <div className={"font-light"}>{product.price} €</div>
             </div>
