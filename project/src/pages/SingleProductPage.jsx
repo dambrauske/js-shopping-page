@@ -25,7 +25,6 @@ const SingleProductPage = () => {
                     singleProduct={singleProduct}
                 />
             </div>
-            <Footer/>
         </div>
     );
 };
