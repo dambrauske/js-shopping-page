@@ -3,16 +3,7 @@ import ImageCard from "./ImageCard.jsx";
 
 const ProductPageImages = ({singleProductImages, singleProductThumbnail}) => {
 
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [mainImage, setMainImage] = useState(singleProductThumbnail ? singleProductThumbnail : undefined)
-
-    const nextImage = (images, currentIndex, setIndex) => {
-        setIndex(currentImageIndex === images.length - 1 ? 0 : currentIndex + 1)
-    }
-
-    const previousImage = (images, currentIndex, setIndex) => {
-        setIndex(currentImageIndex === images.length - 1 ? 0 : currentIndex + 1)
-    }
 
     return (
 
